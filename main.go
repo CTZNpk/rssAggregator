@@ -7,18 +7,30 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
 )
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World hahah ")
-
-}
 
 func main() {
 
 	godotenv.Load()
 
-	http.HandleFunc("/", handler)
+	router := chi.NewRouter()
+
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"https://*", "http://"},
+		AllowedMethods:   []string{"PUT", "GET", "POST", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"*"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: false,
+		MaxAge:           300,
+	}))
+
+	srv := &http.Server{
+		Handler: router,
+		Addr:    ":8080",
+	}
 
 	portString := os.Getenv("PORT")
 	if portString == "" {
@@ -26,7 +38,7 @@ func main() {
 	}
 
 	fmt.Println(portString)
-  fmt.Println("The Server is listening")
-  log.Fatal(http.ListenAndServe(":8080", nil))
+	fmt.Println("The Server is listening")
+	log.Fatal(srv.ListenAndServe())
 
 }
