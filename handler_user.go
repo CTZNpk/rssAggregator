@@ -18,7 +18,7 @@ func (apiConfig *apiConfig) handlerCreateUser(w http.ResponseWriter, r *http.Req
 	params := parameters{}
 	err := decoder.Decode(&params)
 	if err != nil {
-		respondWithEror(w, 400, fmt.Sprintf("Error parsing JSON:", err))
+		respondWithEror(w, 400, fmt.Sprint("Error parsing JSON:", err))
 		return
 	}
 
@@ -29,8 +29,12 @@ func (apiConfig *apiConfig) handlerCreateUser(w http.ResponseWriter, r *http.Req
 		Name:      params.Name,
 	})
 	if err != nil {
-		respondWithEror(w, 400, fmt.Sprintf("Couldn't create user:", err))
+		respondWithEror(w, 400, fmt.Sprint("Couldn't create user:", err))
 		return
 	}
+	respondWithJson(w, 201, databaseUserToUser(user))
+}
+
+func handlerGetUserByAPIKey(w http.ResponseWriter, r *http.Request, user database.User) {
 	respondWithJson(w, 200, databaseUserToUser(user))
 }
