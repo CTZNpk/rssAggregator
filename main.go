@@ -12,6 +12,20 @@ import (
 	"github.com/go-chi/cors"
 )
 
+func respondWithEror(w http.ResponseWriter, code int, msg string) {
+	if code > 499 {
+		log.Println("Responding with 5xx error:", msg)
+	}
+
+	type errResponse struct {
+		Error string `json:"error"`
+	}
+
+	respondWithJson(w, code, errResponse{
+		Error: msg,
+	})
+}
+
 func main() {
 
 	godotenv.Load()
@@ -29,8 +43,14 @@ func main() {
 
 	srv := &http.Server{
 		Handler: router,
-		Addr:    ":8080",
+		Addr:    ":8000",
 	}
+
+	v1Router := chi.NewRouter()
+	v1Router.Get("/ready", handlerRediness)
+	v1Router.Get("/err", handlerErr)
+
+	router.Mount("/v1", v1Router)
 
 	portString := os.Getenv("PORT")
 	if portString == "" {
