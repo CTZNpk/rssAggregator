@@ -1,0 +1,54 @@
+###
+# v1Router.Get("/ready", handlerRediness)
+
+GET http://localhost:8000/v1/ready
+
+
+###
+# v1Router.Get("/err", handlerErr)
+
+GET http://localhost:8000/v1/err
+
+
+###
+# v1Router.Post("/users", apiCfg.handlerCreateUser)
+POST http://localhost:8000/v1/users
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Haider"
+}
+
+# "id": "355ece1e-2c28-465e-b1ac-5388124f8b52",
+# "api_key": "84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49"
+###
+# v1Router.Get("/users", apiCfg.middlewareAuth(handlerGetUserByAPIKey))
+
+GET http://localhost:8000/v1/users
+accept: application/json
+Content-type: application/json
+Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
+
+### 
+# v1Router.Post("/feeds", apiCfg.middlewareAuth(apiCfg.handlerCreateFeed))
+
+POST http://localhost:8000/v1/feeds
+accept: application/json
+Content-type: application/json
+Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
+
+{
+  "name":"Post 3",
+  "url": "https://12.com"
+}
+
+
+###
+# v1Router.Get("/feeds", apiCfg.handlerGetFeeds)
+
+GET http://localhost:8000/v1/feeds
+accept: application/json
+Content-type: application/json
+Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
+
