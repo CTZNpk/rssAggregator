@@ -46,7 +46,7 @@ Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8
 
 {
   "name":"Post 3",
-  "url": "https://1.com"
+  "url": "https://blog.boot.dev/index.xml"
 }
 
 
@@ -69,7 +69,7 @@ Content-type: application/json
 Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
 
 {
-  "feed_id": "d0159819-4c4b-4dc7-b904-1d9bc99f13b4"
+  "feed_id": "f70f7cbd-6793-417e-97c7-6bbae82dc2fb"
 }
 
 
@@ -88,6 +88,15 @@ Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8
 
 
 DELETE http://localhost:8000/v1/feed_follows/8a9c8832-0930-4cd5-a06a-188960a0724a
+accept: application/json
+Content-type: application/json
+Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
+
+
+###
+# v1Router.Get("/posts", apiCfg.middlewareAuth(apiCfg.handlerGetPostsForUser))
+
+GET http://localhost:8000/v1/posts
 accept: application/json
 Content-type: application/json
 Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
