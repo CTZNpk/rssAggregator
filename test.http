@@ -1,4 +1,5 @@
 ###
+# ****************************************************************** TEST RUNNING ***************************************************************************
 # v1Router.Get("/ready", handlerRediness)
 
 GET http://localhost:8000/v1/ready
@@ -10,6 +11,7 @@ GET http://localhost:8000/v1/ready
 GET http://localhost:8000/v1/err
 
 
+# ****************************************************************** TEST USERS ***************************************************************************
 ###
 # v1Router.Post("/users", apiCfg.handlerCreateUser)
 POST http://localhost:8000/v1/users
@@ -30,17 +32,21 @@ accept: application/json
 Content-type: application/json
 Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
 
+
+
+
+# ****************************************************************** TEST FEEDS ***************************************************************************
 ### 
 # v1Router.Post("/feeds", apiCfg.middlewareAuth(apiCfg.handlerCreateFeed))
 
 POST http://localhost:8000/v1/feeds
-accept: application/json
+accept: applicatiok/json
 Content-type: application/json
 Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
 
 {
   "name":"Post 3",
-  "url": "https://12.com"
+  "url": "https://1.com"
 }
 
 
@@ -52,3 +58,36 @@ accept: application/json
 Content-type: application/json
 Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
 
+
+# ****************************************************************** TEST FEED FOLLOWS ***************************************************************************
+###
+# v1Router.Post("/feed_follows", apiCfg.middlewareAuth(apiCfg.handlerFeedFollow))
+
+POST http://localhost:8000/v1/feed_follows
+accept: application/json
+Content-type: application/json
+Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
+
+{
+  "feed_id": "d0159819-4c4b-4dc7-b904-1d9bc99f13b4"
+}
+
+
+
+###
+# v1Router.Get("/feed_follows", apiCfg.middlewareAuth(apiCfg.handlerGetFeedFollows))
+
+GET http://localhost:8000/v1/feed_follows
+accept: application/json
+Content-type: application/json
+Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
+
+
+### 
+# v1Router.Delete("/feed_follows/{feedFollowID}", apiCfg.middlewareAuth(apiCfg.handlerDeleteFeedFollow))
+
+
+DELETE http://localhost:8000/v1/feed_follows/8a9c8832-0930-4cd5-a06a-188960a0724a
+accept: application/json
+Content-type: application/json
+Authorization: ApiKey 84840e4b92ad3843988bbc642a418c8fa7ad883c72d84ffcc6336988d8dcdc49 
