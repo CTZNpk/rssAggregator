@@ -46,9 +46,6 @@ The RSS Aggregator is a Go-based application that aggregates RSS feeds, allowing
 
 ---
 
-
----
-
 ## How It Works
 - **Feed Fetching**: The app periodically fetches RSS feeds from configured sources and parses the XML to extract relevant data.
 - **Aggregation**: Data from all feeds is stored in the database and displayed in a combined format.
