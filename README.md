@@ -46,21 +46,6 @@ The RSS Aggregator is a Go-based application that aggregates RSS feeds, allowing
 
 ---
 
-## Directory Structure
-```
-.
-├── cmd                       # Entry point for the application
-│   ├── main.go               # Main executable
-├── internal                  # Internal application logic
-│   ├── feeds                 # RSS feed handling
-│   │   ├── fetcher.go        # Logic for fetching and parsing RSS feeds
-│   │   ├── aggregator.go     # Aggregation logic
-│   ├── scraper               # Web scraping utilities
-│   │   ├── scraper.go        # Scraper implementation
-├── sql                       # SQL scripts for database setup
-│   ├── schema.sql            # Database schema
-│   ├── migrations            # Database migration scripts
-```
 
 ---
 
